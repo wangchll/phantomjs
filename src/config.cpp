@@ -136,6 +136,14 @@ void Config::processArgs(const QStringList &args)
             setRemoteDebugPort(arg.mid(23).trimmed().toInt());
             continue;
         }
+        if (arg == "--web-security=yes") {
+            setWebSecurityEnabled(true);
+            continue;
+        }
+        if (arg == "--web-security=no") {
+            setWebSecurityEnabled(false);
+            continue;
+        }
         if (arg.startsWith("--")) {
             setUnknownOption(QString("Unknown option '%1'").arg(arg));
             return;
@@ -395,6 +403,16 @@ void Config::setRemoteDebugPort(const int port)
     m_remoteDebugPort = port;
 }
 
+bool Config::webSecurityEnabled() const
+{
+    return m_webSecurityEnabled;
+}
+
+void Config::setWebSecurityEnabled(const bool value)
+{
+    m_webSecurityEnabled = value;
+}
+
 // private:
 void Config::resetToDefaults()
 {
@@ -416,6 +434,7 @@ void Config::resetToDefaults()
     m_versionFlag = false;
     m_debug = false;
     m_remoteDebugPort = -1;
+    m_webSecurityEnabled = true;
 }
 
 void Config::setProxyHost(const QString &value)

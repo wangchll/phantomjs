@@ -48,6 +48,7 @@ class Config: QObject
     Q_PROPERTY(QString proxyType READ proxyType WRITE setProxyType)
     Q_PROPERTY(QString proxy READ proxy WRITE setProxy)
     Q_PROPERTY(QString scriptEncoding READ scriptEncoding WRITE setScriptEncoding)
+    Q_PROPERTY(bool webSecurityEnabled READ webSecurityEnabled WRITE setWebSecurityEnabled)
 
 public:
     Config(QObject *parent = 0);
@@ -108,6 +109,10 @@ public:
 
     void setRemoteDebugPort(const int port);
     int remoteDebugPort() const;
+    
+    bool webSecurityEnabled() const;
+    void setWebSecurityEnabled(const bool value);
+
 private:
     void resetToDefaults();
     void setProxyHost(const QString &value);
@@ -135,6 +140,7 @@ private:
     QString m_authPass;
     bool m_debug;
     int m_remoteDebugPort;
+    bool m_webSecurityEnabled;
 };
 
 #endif // CONFIG_H
